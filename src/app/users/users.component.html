@@ -1,0 +1,5 @@
+<app-user
+  [routerLink]="['/users', user.id]"
+  *ngFor="let user of users"
+  [user]="user"
+></app-user>
