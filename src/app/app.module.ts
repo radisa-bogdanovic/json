@@ -10,6 +10,7 @@ import { AlbumsComponent } from './albums/albums.component';
 import { UsersComponent } from './users/users.component';
 import { AboutPhotoComponent } from './about-photo/about-photo.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 const userRoutes: Routes = [
   {
@@ -31,11 +32,14 @@ const userRoutes: Routes = [
     AlbumsComponent,
     UsersComponent,
     AboutPhotoComponent,
+    PostsComponent,
+    TodosComponent,
   ],
   imports: [
     BrowserModule,
     CommonModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot(userRoutes),
   ],
   providers: [],

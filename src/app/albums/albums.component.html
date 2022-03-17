@@ -1,4 +1,4 @@
-<div class="row container" *ngFor="let photo of picture">
+<div class="row container" *ngFor="let photo of pictures">
   <h5>Photo id: {{ photo.id }}</h5>
   <a (click)="goToPicInfo(photo.id)">
     <img src="{{ photo.thumbnailUrl }}" alt="" />

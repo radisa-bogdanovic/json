@@ -1,37 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-
+import { todo } from '../models/todo-modul';
+import { Services } from '../services';
 @Component({
   selector: 'app-todos',
   templateUrl: './todos.component.html',
   styleUrls: ['./todos.component.css'],
 })
 export class TodosComponent implements OnInit {
-  todo: { completed: boolean; id: number; title: string; userId: number }[] =
-    [];
+  todos: todo[] = [];
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private services: Services) {}
   id: number = +this.route.snapshot.params['id'];
   ngOnInit(): void {
+    this.getTodosComponent();
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
       return this.id;
     });
-
-    fetch(`https://jsonplaceholder.typicode.com/users/${this.id}/todos`)
-      .then((response) => response.json())
-      .then(
-        (
-          response: {
-            userId: number;
-            id: number;
-            title: string;
-            completed: boolean;
-          }[]
-        ) => {
-          this.todo = response;
-          console.log(this.todo);
-        }
-      );
+  }
+  getTodosComponent() {
+    this.services.getTodo(this.id).subscribe((data: todo[]) => {
+      this.todos = data;
+    });
   }
 }

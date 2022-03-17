@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../user/user.modul';
+import { User } from '../models/user-modul';
+import { Services } from '../services';
 
 @Component({
   selector: 'app-users',
@@ -8,13 +9,13 @@ import { User } from '../user/user.modul';
 })
 export class UsersComponent implements OnInit {
   users: User[] = [];
-  constructor() {}
+  constructor(private services: Services) {}
   ngOnInit(): void {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then((response) => response.json())
-      .then((response: User[]) => {
-        this.users = response;
-        return this.users;
-      });
+    this.loadUsers();
+  }
+  loadUsers() {
+    this.services.getUsers().subscribe((data: User[]) => {
+      this.users = data;
+    });
   }
 }

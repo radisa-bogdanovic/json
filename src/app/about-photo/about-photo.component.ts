@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { picture } from '../models/picture-modul';
+import { Services } from '../services';
 
 @Component({
   selector: 'app-about-photo',
@@ -7,26 +9,20 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./about-photo.component.css'],
 })
 export class AboutPhotoComponent implements OnInit {
-  aboutPic: {
-    albumId: number;
-    id: number;
-    title: string;
-    url: string;
-    thumbnailUrl: string;
-  }[] = [];
+  aboutPic: picture[] = [];
   id: number = +this.route.snapshot.params['id'];
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private service: Services) {}
 
   ngOnInit(): void {
+    this.getPhoto();
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
       return this.id;
     });
-
-    fetch(`https://jsonplaceholder.typicode.com/albums/${this.id}/photos`)
-      .then((response) => response.json())
-      .then((response) => {
-        this.aboutPic = response;
-      });
+  }
+  getPhoto() {
+    this.service.getPhoto(this.id).subscribe((data: picture[]) => {
+      this.aboutPic = data;
+    });
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from './user.modul';
+import { User } from '../models/user-modul';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
