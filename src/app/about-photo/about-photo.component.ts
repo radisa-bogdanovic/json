@@ -23,6 +23,7 @@ export class AboutPhotoComponent implements OnInit {
   getPhoto() {
     this.service.getPhoto(this.id).subscribe((data: picture[]) => {
       this.aboutPic = data;
+      return this.id;
     });
   }
 }

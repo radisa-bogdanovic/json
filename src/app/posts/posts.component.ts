@@ -28,4 +28,9 @@ export class PostsComponent implements OnInit {
       this.posts = data;
     });
   }
+  goToComments(id: number) {
+    this.router.navigate(['/posts', id, 'comments'], {
+      relativeTo: this.route,
+    });
+  }
 }

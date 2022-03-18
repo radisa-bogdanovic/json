@@ -1,0 +1,8 @@
+<div class="wrapper" *ngFor="let comment of comments">
+  <h4>User name: {{ comment.name }}</h4>
+  <h5>User mail:{{ comment.email }}</h5>
+  <p>
+    Comment: <br />
+    {{ comment.body }}
+  </p>
+</div>

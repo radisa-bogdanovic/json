@@ -1,5 +1,10 @@
-<div class="row" *ngFor="let post of posts">
+<button class="btn btn-primary">Add new post</button>
+<div
+  class="row col-sm-6"
+  *ngFor="let post of posts"
+  (click)="goToComments(post.id)"
+>
   <h2>{{ post.title }}</h2>
   <h5>{{ post.body }}</h5>
+  <hr />
 </div>
-<h3>hello</h3>

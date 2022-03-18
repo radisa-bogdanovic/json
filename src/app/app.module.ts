@@ -11,6 +11,7 @@ import { UsersComponent } from './users/users.component';
 import { AboutPhotoComponent } from './about-photo/about-photo.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CommentsComponent } from './comments/comments.component';
 
 const userRoutes: Routes = [
   {
@@ -24,6 +25,7 @@ const userRoutes: Routes = [
   { path: 'users/:id/albums', component: AlbumsComponent },
   { path: 'users/:id/todos', component: TodosComponent },
   { path: 'users/:id/posts', component: PostsComponent },
+  { path: 'posts/:id/comments', component: CommentsComponent },
 ];
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ const userRoutes: Routes = [
     AboutPhotoComponent,
     PostsComponent,
     TodosComponent,
+    CommentsComponent,
   ],
   imports: [
     BrowserModule,

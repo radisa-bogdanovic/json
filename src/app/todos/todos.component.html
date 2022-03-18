@@ -1,5 +1,20 @@
-<div class="row">
-  <h4>Hello title :</h4>
-  <input type="checkbox" [checked]="false" />
-  <label for="checkbox">Check me </label>
+<button class="btn btn-primary">Add toDo</button>
+<div
+  class="container div-style col-sm-5"
+  *ngFor="let onetodo of todos; let i = index"
+>
+  <h4>{{ onetodo.title }}</h4>
+  <div class="column">
+    <input
+      class="checkbox"
+      type="checkbox"
+      [checked]="onetodo.completed"
+      (click)="onCheck(i)"
+    />
+    >>
+    <ng-container *ngIf="onetodo.completed; else elseTemplateName"
+      >Job has done</ng-container
+    >
+    <ng-template #elseTemplateName>Job has not done yet</ng-template>
+  </div>
 </div>
