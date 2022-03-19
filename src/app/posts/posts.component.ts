@@ -33,4 +33,9 @@ export class PostsComponent implements OnInit {
       relativeTo: this.route,
     });
   }
+  toDeletePost(i: number) {
+    this.services.deletePost(i).subscribe((data: Post) => {
+      this.getPosts();
+    });
+  }
 }

@@ -1,10 +1,11 @@
 <button class="btn btn-primary">Add new post</button>
-<div
-  class="row col-sm-6"
-  *ngFor="let post of posts"
-  (click)="goToComments(post.id)"
->
-  <h2>{{ post.title }}</h2>
-  <h5>{{ post.body }}</h5>
-  <hr />
+<div class="row col-sm-6" *ngFor="let post of posts; let i = index">
+  <div class="row wrapeer" (click)="goToComments(post.id)">
+    <h2>{{ post.title }}</h2>
+    <h5>{{ post.body }}</h5>
+    <hr />
+  </div>
+  <button class="btn btn-danger" (click)="toDeletePost(i)">
+    Delete this post
+  </button>
 </div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { todo } from './models/todo-modul';
 import { User } from './models/user-modul';
@@ -10,6 +10,12 @@ import { Comment } from './models/comment-modul';
   providedIn: 'root',
 })
 export class Services {
+  httpOptions = {
+    headers: new HttpHeaders({
+      authority: 'jsonplaceholder.typicode.com',
+      method: 'DELETE',
+    }),
+  };
   urlLink: string = 'https://jsonplaceholder.typicode.com';
   constructor(private http: HttpClient) {}
   getUsers(): Observable<User[]> {
@@ -20,6 +26,18 @@ export class Services {
   }
   getPosts(id: number): Observable<Post[]> {
     return this.http.get<Post[]>(this.urlLink + '/users/' + id + '/posts/');
+  }
+  deletePost(i: number): Observable<Post> {
+    return this.http.delete<Post>(
+      `${this.urlLink}/posts/${i}`,
+      this.httpOptions
+    );
+  }
+  deleteToDo(i: number): Observable<todo[]> {
+    return this.http.delete<todo[]>(
+      this.urlLink + '/todos/' + i,
+      this.httpOptions
+    );
   }
   getPhoto(id: number): Observable<picture[]> {
     return this.http.get<picture[]>(this.urlLink + '/users/' + id + '/photos/');

@@ -1,4 +1,5 @@
-<button class="btn btn-primary">Add toDo</button>
+||<button class="btn btn-primary">Add toDo</button>
+
 <div
   class="container div-style col-sm-5"
   *ngFor="let onetodo of todos; let i = index"
@@ -16,5 +17,10 @@
       >Job has done</ng-container
     >
     <ng-template #elseTemplateName>Job has not done yet</ng-template>
+  </div>
+  <div>
+    ||<button class="btn btn-danger" (click)="deleteToDo(i)">
+      Delete this todo
+    </button>
   </div>
 </div>
