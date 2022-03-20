@@ -12,7 +12,7 @@ import { AboutPhotoComponent } from './about-photo/about-photo.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommentsComponent } from './comments/comments.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 const userRoutes: Routes = [
   {
     path: 'users',
@@ -44,6 +44,7 @@ const userRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(userRoutes),
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

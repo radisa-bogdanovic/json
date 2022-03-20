@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { picture } from '../models/picture-modul';
+import { picture } from '../models';
 import { Services } from '../services';
 
 @Component({

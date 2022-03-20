@@ -1,4 +1,22 @@
-||<button class="btn btn-primary">Add toDo</button>
+||<button class="btn btn-primary" (click)="openCloseForm()">
+  Add new post
+</button>
+<form *ngIf="isTrue" [formGroup]="addTodo" (ngSubmit)="addNewToDo()">
+  <br />
+  <input
+    type="text"
+    name=""
+    id=""
+    placeholder="Enter todo name"
+    formControlName="title"
+  />
+  <br /><br />
+  <br />
+  <button class="btn btn-success" [disabled]="addTodo.invalid">Add</button>
+</form>
+<button *ngIf="isTrue" class="btn btn-danger" (click)="closeForm()">
+  Cancel
+</button>
 
 <div
   class="container div-style col-sm-5"
@@ -19,6 +37,29 @@
     <ng-template #elseTemplateName>Job has not done yet</ng-template>
   </div>
   <div>
+    <button class="btn btn-primary" (click)="editToDo()">Edit this todo</button>
+    <form
+      *ngIf="isTrueEdit"
+      [formGroup]="editFormTodo"
+      (ngSubmit)="updateTodo(onetodo.id)"
+    >
+      <br />
+      <input
+        type="text"
+        name="title"
+        id="title"
+        placeholder="Enter new todo name"
+        formControlName="title"
+      />
+      <br /><br />
+      <br />
+      <button class="btn btn-success" [disabled]="editFormTodo.invalid">
+        Accept
+      </button>
+    </form>
+    <button *ngIf="isTrueEdit" class="btn btn-danger" (click)="closeEditForm()">
+      Cancel
+    </button>
     ||<button class="btn btn-danger" (click)="deleteToDo(i)">
       Delete this todo
     </button>
