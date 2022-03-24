@@ -1,5 +1,5 @@
 <button class="btn btn-primary" (click)="openCloseForm()">Add new post</button>
-<form *ngIf="isTrue" [formGroup]="addPost" (ngSubmit)="addNewPost()">
+<form *ngIf="isTrue" [formGroup]="addPostForm" (ngSubmit)="addNewPost()">
   <br />
   <input
     type="text"
@@ -17,7 +17,7 @@
     formControlName="body"
   ></textarea>
   <br />
-  <button class="btn btn-success" [disabled]="addPost.invalid">Add</button>
+  <button class="btn btn-success" [disabled]="addPostForm.invalid">Add</button>
 </form>
 <button *ngIf="isTrue" class="btn btn-danger" (click)="closeForm()">
   Cancel
@@ -31,7 +31,7 @@
   <button class="btn btn-primary" (click)="editToDo()">Edit this todo</button>
   <form
     *ngIf="isTrueEdit"
-    [formGroup]="editPost"
+    [formGroup]="addPostForm"
     (ngSubmit)="updatePost(post.id)"
   >
     <br />
@@ -51,7 +51,7 @@
       formControlName="body"
     ></textarea>
     <br />
-    <button class="btn btn-success" [disabled]="editPost.invalid">
+    <button class="btn btn-success" [disabled]="addPostForm.invalid">
       Accept
     </button>
   </form>

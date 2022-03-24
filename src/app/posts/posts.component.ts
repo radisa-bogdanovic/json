@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { Post } from '../models';
-import { Services } from '../services';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-
+import { FormBuilder, Validators } from '@angular/forms';
+import { Post } from '../models/Post-model';
+import { PostService } from './post-service';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
@@ -13,19 +12,15 @@ export class PostsComponent implements OnInit {
   posts: Post[] = [];
   isTrue: boolean = false;
   isTrueEdit: boolean = false;
-  addPost = new FormGroup({
-    title: new FormControl('', Validators.required),
-    body: new FormControl('', Validators.required),
+  addPostForm = this.fb.group({
+    body: ['', Validators.required],
+    title: ['', Validators.required],
   });
-  editPost = new FormGroup({
-    title: new FormControl('', Validators.required),
-    body: new FormControl('', Validators.required),
-  });
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private services: Services
+    private services: PostService,
+    private fb: FormBuilder
   ) {}
   id: number = +this.route.snapshot.params['id'];
   ngOnInit(): void {
@@ -54,19 +49,20 @@ export class PostsComponent implements OnInit {
     const newPost = {
       userId: this.posts[0].userId,
       id: this.posts.length + 1,
-      title: this.addPost.value.title,
-      body: this.addPost.value.body,
+      title: this.addPostForm.value.title,
+      body: this.addPostForm.value.body,
     };
     console.log(newPost);
     this.services.addNewPostService(newPost).subscribe((data) => {});
-    // this.posts = [newPost, ...this.posts];
-    this.addPost.reset();
+    this.posts = [newPost, ...this.posts];
+    this.addPostForm.reset();
   }
   openCloseForm() {
     this.isTrue = true;
   }
   closeForm() {
     this.isTrue = false;
+    this.addPostForm.reset();
   }
   editToDo() {
     this.isTrueEdit = true;
@@ -75,11 +71,15 @@ export class PostsComponent implements OnInit {
     const updatedPost = {
       userId: this.posts[0].userId,
       id: this.posts.length + 1,
-      title: this.addPost.value.title,
-      body: this.addPost.value.body,
+      title: this.addPostForm.value.title,
+      body: this.addPostForm.value.body,
     };
-    this.services.updatePost(i, updatedPost).subscribe((data: Post) => {});
-    this.editPost.reset();
+    this.services.updatePost(i, updatedPost).subscribe((data: Post) => {
+      this.posts = this.posts.map(
+        (post: Post): Post => (post.id === data.id ? data : post)
+      );
+    });
+    this.addPostForm.reset();
   }
   closeEditForm() {
     this.isTrueEdit = false;

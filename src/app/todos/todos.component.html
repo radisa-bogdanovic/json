@@ -1,7 +1,7 @@
 ||<button class="btn btn-primary" (click)="openCloseForm()">
   Add new post
 </button>
-<form *ngIf="isTrue" [formGroup]="addTodo" (ngSubmit)="addNewToDo()">
+<form *ngIf="isTrue" [formGroup]="addToDoForm" (ngSubmit)="addNewToDo()">
   <br />
   <input
     type="text"
@@ -12,7 +12,7 @@
   />
   <br /><br />
   <br />
-  <button class="btn btn-success" [disabled]="addTodo.invalid">Add</button>
+  <button class="btn btn-success" [disabled]="addToDoForm.invalid">Add</button>
 </form>
 <button *ngIf="isTrue" class="btn btn-danger" (click)="closeForm()">
   Cancel
@@ -40,7 +40,7 @@
     <button class="btn btn-primary" (click)="editToDo()">Edit this todo</button>
     <form
       *ngIf="isTrueEdit"
-      [formGroup]="editFormTodo"
+      [formGroup]="addToDoForm"
       (ngSubmit)="updateTodo(onetodo.id)"
     >
       <br />
@@ -53,7 +53,7 @@
       />
       <br /><br />
       <br />
-      <button class="btn btn-success" [disabled]="editFormTodo.invalid">
+      <button class="btn btn-success" [disabled]="addToDoForm.invalid">
         Accept
       </button>
     </form>

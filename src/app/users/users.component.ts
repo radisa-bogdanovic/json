@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../models';
-import { Services } from '../services';
-
+import { User } from '../models/User-model';
+import { UsersService } from './users-service';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -9,7 +8,7 @@ import { Services } from '../services';
 })
 export class UsersComponent implements OnInit {
   users: User[] = [];
-  constructor(private services: Services) {}
+  constructor(private services: UsersService) {}
   ngOnInit(): void {
     this.loadUsers();
   }

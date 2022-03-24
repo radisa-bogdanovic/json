@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { picture } from '../models';
-import { Services } from '../services';
 
+import { PictureService } from '../about-photo/picture-service';
+import { Picture } from '../models/picture-model';
 @Component({
   selector: 'app-albums',
   templateUrl: './albums.component.html',
   styleUrls: ['./albums.component.css'],
 })
 export class AlbumsComponent implements OnInit {
-  pictures: picture[] = [];
+  pictures: Picture[] = [];
   id: number = +this.route.snapshot.params['id'];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private services: Services
+    private services: PictureService
   ) {}
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class AlbumsComponent implements OnInit {
     });
   }
   getPicture() {
-    this.services.getPhoto(this.id).subscribe((data: picture[]) => {
+    this.services.getPhoto(this.id).subscribe((data: Picture[]) => {
       this.pictures = data;
     });
   }

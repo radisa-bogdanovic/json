@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from '../models';
-import { ActivatedRoute, Router } from '@angular/router';
 
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../models/User-model';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',

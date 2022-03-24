@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Comment } from '../models';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Services } from '../services';
+import { CommentService } from './comment-service';
+import { Comment } from '../models/comment-model';
 
 @Component({
   selector: 'app-comments',
@@ -11,13 +11,10 @@ import { Services } from '../services';
 export class CommentsComponent implements OnInit {
   comments: Comment[] = [];
   id = this.route.snapshot.params['id'];
-  constructor(private route: ActivatedRoute, private service: Services) {}
+  constructor(private route: ActivatedRoute, private service: CommentService) {}
 
   ngOnInit(): void {
     this.loadComments();
-    this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
-    });
   }
   loadComments() {
     this.service.getComments(this.id).subscribe((data: Comment[]) => {
