@@ -12,7 +12,7 @@ export class PostsComponent implements OnInit {
   posts: Post[] = [];
   isTrue: boolean = false;
   isTrueEdit: boolean = false;
-  addPostForm = this.fb.group({
+  postForm = this.fb.group({
     body: ['', Validators.required],
     title: ['', Validators.required],
   });
@@ -49,20 +49,20 @@ export class PostsComponent implements OnInit {
     const newPost = {
       userId: this.posts[0].userId,
       id: this.posts.length + 1,
-      title: this.addPostForm.value.title,
-      body: this.addPostForm.value.body,
+      title: this.postForm.value.title,
+      body: this.postForm.value.body,
     };
     console.log(newPost);
     this.services.addNewPostService(newPost).subscribe((data) => {});
     this.posts = [newPost, ...this.posts];
-    this.addPostForm.reset();
+    this.postForm.reset();
   }
   openCloseForm() {
     this.isTrue = true;
   }
   closeForm() {
     this.isTrue = false;
-    this.addPostForm.reset();
+    this.postForm.reset();
   }
   editToDo() {
     this.isTrueEdit = true;
@@ -71,15 +71,15 @@ export class PostsComponent implements OnInit {
     const updatedPost = {
       userId: this.posts[0].userId,
       id: this.posts.length + 1,
-      title: this.addPostForm.value.title,
-      body: this.addPostForm.value.body,
+      title: this.postForm.value.title,
+      body: this.postForm.value.body,
     };
     this.services.updatePost(i, updatedPost).subscribe((data: Post) => {
       this.posts = this.posts.map(
         (post: Post): Post => (post.id === data.id ? data : post)
       );
     });
-    this.addPostForm.reset();
+    this.postForm.reset();
   }
   closeEditForm() {
     this.isTrueEdit = false;

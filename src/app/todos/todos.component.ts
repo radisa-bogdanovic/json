@@ -13,7 +13,7 @@ export class TodosComponent implements OnInit {
   isTrue: boolean = false;
   isTrueEdit: boolean = false;
 
-  addToDoForm = this.fb.group({
+  toDoForm = this.fb.group({
     title: ['', Validators.required],
   });
 
@@ -51,20 +51,20 @@ export class TodosComponent implements OnInit {
     const newTodo = {
       userId: this.todos[0].userId,
       id: this.todos.length + 1,
-      title: this.addToDoForm.value.title,
+      title: this.toDoForm.value.title,
       completed: false,
     };
     console.log(newTodo);
     this.services.addNewToDoService(newTodo).subscribe((data) => {});
     this.todos = [newTodo, ...this.todos];
-    this.addToDoForm.reset();
+    this.toDoForm.reset();
   }
   openCloseForm() {
     this.isTrue = true;
   }
   closeForm() {
     this.isTrue = false;
-    this.addToDoForm.reset();
+    this.toDoForm.reset();
   }
   editToDo() {
     this.isTrueEdit = true;
@@ -73,11 +73,11 @@ export class TodosComponent implements OnInit {
     const updatedTodo = {
       completed: this.todos[i].completed,
       id: this.todos[i].id,
-      title: this.addToDoForm.value.title,
+      title: this.toDoForm.value.title,
       userId: this.todos[i].userId,
     };
     this.services.updateTodo(i, updatedTodo).subscribe((data: Todo) => {});
-    this.addToDoForm.reset();
+    this.toDoForm.reset();
   }
   closeEditForm() {
     this.isTrueEdit = false;
