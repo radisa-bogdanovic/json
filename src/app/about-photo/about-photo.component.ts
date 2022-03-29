@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PictureService } from './picture-service';
 import { Picture } from '../models/picture-model';
+import { Params } from '@angular/router';
 @Component({
   selector: 'app-about-photo',
   templateUrl: './about-photo.component.html',
@@ -14,6 +15,9 @@ export class AboutPhotoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPhoto();
+    this.route.params.subscribe((params: Params) => {
+      return this.service.getPhoto(params['id']);
+    });
   }
   getPhoto() {
     this.service.getPhoto(this.id).subscribe((data: Picture[]) => {

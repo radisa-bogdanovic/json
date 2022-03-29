@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Post } from '../models/Post-model';
+import { Post } from '../models/post-model';
 import { PostService } from './post-service';
 @Component({
   selector: 'app-posts',
@@ -26,8 +26,7 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {
     this.getPosts();
     this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
-      return this.id;
+      return this.services.getPosts(params['id']);
     });
   }
   getPosts() {
@@ -36,9 +35,7 @@ export class PostsComponent implements OnInit {
     });
   }
   goToComments(id: number) {
-    this.router.navigate(['/posts', id, 'comments'], {
-      relativeTo: this.route,
-    });
+    this.router.navigate(['/posts', id, 'comments'], {});
   }
   toDeletePost(i: number) {
     this.services.deletePost(i).subscribe((data: Post) => {

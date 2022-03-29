@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../models/User-model';
+import { User } from '../models/user-model';
 import { UsersService } from './users-service';
 @Component({
   selector: 'app-users',
@@ -7,6 +7,7 @@ import { UsersService } from './users-service';
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
+  user!: User;
   users: User[] = [];
   constructor(private services: UsersService) {}
   ngOnInit(): void {

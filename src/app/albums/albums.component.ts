@@ -20,13 +20,16 @@ export class AlbumsComponent implements OnInit {
   ngOnInit(): void {
     this.getPicture();
     this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
-      return this.id;
+      this.route.params.subscribe((params: Params) => {
+        return this.services.getPhoto(params['id']);
+      });
     });
   }
   getPicture() {
     this.services.getPhoto(this.id).subscribe((data: Picture[]) => {
-      this.pictures = data;
+      this.pictures = data.filter((data: Picture) => {
+        return data.albumId == this.id;
+      });
     });
   }
   goToPicInfo(id: number) {

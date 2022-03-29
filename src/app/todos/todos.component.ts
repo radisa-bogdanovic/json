@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Todo } from '../models/Todo-model';
+import { Todo } from '../models/todo-model';
 import { TodoService } from './todos-service';
 @Component({
   selector: 'app-todos',
@@ -30,8 +30,7 @@ export class TodosComponent implements OnInit {
   ngOnInit(): void {
     this.getTodosComponent();
     this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
-      return this.id;
+      return this.services.getTodo(params['id']);
     });
   }
   onCheck(i: number) {
