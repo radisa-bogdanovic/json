@@ -1,0 +1,64 @@
+<button class="btn btn-primary" (click)="openCloseForm()">Add new post</button>
+<form *ngIf="isTrue" [formGroup]="postForm" (ngSubmit)="addNewPost()">
+  <br />
+  <input
+    type="text"
+    name=""
+    id=""
+    placeholder="Enter post name"
+    formControlName="title"
+  />
+  <br /><br />
+  <textarea
+    name="body"
+    id=""
+    placeholder="Enter post text"
+    rows="3"
+    formControlName="body"
+  ></textarea>
+  <br />
+  <button class="btn btn-success" [disabled]="postForm.invalid">Add</button>
+</form>
+<button *ngIf="isTrue" class="btn btn-danger" (click)="closeForm()">
+  Cancel
+</button>
+<div class="row col-sm-6" *ngFor="let post of posts; let i = index">
+  <div class="row wrapeer" (click)="goToComments(post.id)">
+    <h2>{{ post.title }}</h2>
+    <h5>{{ post.body }}</h5>
+    <hr />
+  </div>
+  <button class="btn btn-primary" (click)="editToDo()">Edit this post</button>
+  <form
+    *ngIf="isTrueEdit"
+    [formGroup]="postForm"
+    (ngSubmit)="updatePost(post.id)"
+  >
+    <br />
+    <input
+      type="text"
+      name="title"
+      id="title"
+      placeholder="Enter new todo name"
+      formControlName="title"
+    />
+    <br /><br />
+    <textarea
+      name="body"
+      id=""
+      placeholder="Enter post text"
+      rows="3"
+      formControlName="body"
+    ></textarea>
+    <br />
+    <button class="btn btn-success" [disabled]="postForm.invalid">
+      Accept
+    </button>
+  </form>
+  <button *ngIf="isTrueEdit" class="btn btn-danger" (click)="closeEditForm()">
+    Cancel
+  </button>
+  <button class="btn btn-danger" (click)="toDeletePost(i)">
+    Delete this post
+  </button>
+</div>
